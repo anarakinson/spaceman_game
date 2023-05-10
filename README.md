@@ -1,5 +1,6 @@
 # spaceman_game
 
+done:
 1. Created base
 2. Created sprites
 3. Created moving environment
