@@ -14,3 +14,6 @@ todo:
 1. Refactor spaceman code, create class "spaceman"
 2. Create enemies
 3. Create environmental obstacles
+4. Create UI
+5. Create menu
+6. Create inventory
