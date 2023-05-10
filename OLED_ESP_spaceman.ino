@@ -4,6 +4,7 @@
 #include "images.h"
 #include "environment.h"
 #include "projectile.h"
+#include "spaceman.h"
 
 #include <vector>
 
@@ -19,18 +20,19 @@
 
 /*-------------------------------------------------------------------*/
 
+// #define DISPLAY_WIDTH 128
+// #define DISPLAY_HEIGHT 64
+
 SSD1306Wire display(0x3c, SDA_PIN, SCL_PIN); // SDA , SCL 
 
-#define DISPLAY_WIDTH 128
-#define DISPLAY_HEIGHT 64
-
-// const int display_width = display.getWidth();
-// const int display_width = display.getHeight();
+const int DISPLAY_WIDTH = display.getWidth();
+const int DISPLAY_HEIGHT = display.getHeight();
 
 /*-------------------------------------------------------------------*/
 
 #define FUEL_LIMIT 75
 #define AMMO_LIMIT 25
+
 unsigned short ground = 62;
 
 unsigned long long counter = 0;

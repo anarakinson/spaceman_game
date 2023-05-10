@@ -10,11 +10,5 @@ class Projectile {
 
     bool right_direction = true;
 
-    void flight() {
-      if (right_direction) {
-        x_coord += 1;
-      } else if (!right_direction) {
-        x_coord -= 1;
-      }
-    }
+    void flight();
 };
