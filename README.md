@@ -1,5 +1,9 @@
 # spaceman_game
 
+project for esp8266
+
+---
+
 done:
 1. Created base
 2. Created sprites
