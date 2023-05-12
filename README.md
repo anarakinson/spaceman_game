@@ -1,6 +1,6 @@
 # spaceman_game
 
-project for esp8266
+project for esp8266 with oled display 128x64
 
 ---
 
