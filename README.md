@@ -9,9 +9,10 @@ done:
 2. Created sprites
 3. Created moving environment
 4. Created projectiles
+5. Create class "spaceman"
 
 todo:
-1. Refactor spaceman code, create class "spaceman"
+1. Refactor code
 2. Create enemies
 3. Create environmental obstacles
 4. Create UI

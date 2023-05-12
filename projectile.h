@@ -11,4 +11,5 @@ class Projectile {
     bool right_direction = true;
 
     void flight();
+    const unsigned char *projectile_bits;
 };
