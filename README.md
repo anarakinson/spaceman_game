@@ -12,9 +12,9 @@ done:
 5. Create class "spaceman"
 
 todo:
-1. Refactor code
-2. Create enemies
-3. Create environmental obstacles
-4. Create UI
-5. Create menu
-6. Create inventory
+1. Create enemies
+2. Create environmental obstacles
+3. Create UI
+4. Create menu
+5. Create inventory
+6. Refactor code
