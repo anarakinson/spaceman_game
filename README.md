@@ -9,8 +9,8 @@ done:
 2. Created sprites
 3. Created moving environment
 4. Created projectiles
-5. Create abstract class Enemy
-6. Create class "spaceman"
+5. Create class "spaceman"
+6. Create abstract class Enemy
 7. Add enemy balloon (only base)
 
 todo: 
