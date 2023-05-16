@@ -2,6 +2,7 @@
 #include "environment.h"
 #include "projectile.h"
 #include "spaceman.h"
+#include "balloon.h"
 
 #include <Wire.h>
 #include <SSD1306Wire.h>
@@ -36,6 +37,10 @@ Spaceman spaceman;
 unsigned short ground = 62;
 unsigned long long counter = 0;
 unsigned long long projectile_counter = 0;
+
+/* ----- enemies ----- */
+unsigned long long balloon_counter = 0;
+std::vector<Balloon> balloons;
 
 /* ----- environment ----- */
 int environment_coords = 0;
@@ -100,7 +105,8 @@ void loop() {
   display.drawString(40, 2, "ammo:");
   display.drawString(74, 2, String(spaceman.get_ammo()));
 
-//  display.drawString(2, 44, String(environment_coords));
+  // debug
+  display.drawString(2, 44, String(millis() / 1000));
   
   display.drawHorizontalLine(0, 14, 128);
   
@@ -127,24 +133,65 @@ void loop() {
 
 
   /* ----- inputs ----- */
-  spaceman.get_left_move( !digitalRead(LEFT_PIN) );
-  spaceman.get_right_move( !digitalRead(RIGHT_PIN) );
-  spaceman.get_attack_action( !digitalRead(ATTACK_PIN) );
-  spaceman.get_jump_action( !digitalRead(JUMP_PIN) );
+  bool left_move = !digitalRead(LEFT_PIN);
+  bool right_move = !digitalRead(RIGHT_PIN);
+  bool attack_action = !digitalRead(ATTACK_PIN);
+  bool jump_action = !digitalRead(JUMP_PIN);
+  spaceman.set_left_move(left_move);
+  spaceman.set_right_move(right_move);
+  spaceman.set_attack_action(attack_action);
+  spaceman.set_jump_action(jump_action);
   
   /* ----------------------------------- ACT ------------------------------------- */
   spaceman.set_stand_state();
-  spaceman.move();
+  spaceman.move(environment_coords, projectiles);
   spaceman.check_hitpoints();
   spaceman.attack(projectiles);
-  
 
-  /*----------------- projectile ------------------*/
+
+  /* ----------------------------- balloons ----------------------------- */
+  if (millis() - balloon_counter >= 4000) {
+    balloon_counter = millis();
+
+    Balloon balloon(DISPLAY_WIDTH / 3 - environment_coords, DISPLAY_HEIGHT);
+    balloons.push_back(balloon);
+  }
+  for (int j = 0; j < balloons.size(); ++j) {
+    balloons[j].move();
+    int b_x = balloons[j].get_x() + environment_coords;
+    int b_y = balloons[j].get_y();
+    display.drawXbm(
+      b_x, 
+      b_y, 
+      balloon_width, 
+      balloon_height, 
+      balloons[j].get_bits()
+    );
+    if (b_y < -DISPLAY_HEIGHT) {
+      balloons.erase(balloons.begin() + j);
+    }
+
+    for (int i = 0; i < projectiles.size(); ++i) {
+      if (
+        (projectiles[i].x_coord + projectile_width > b_x + 4 &&
+        projectiles[i].x_coord < b_x + balloon_width - 4)
+          &&
+        (projectiles[i].y_coord + projectile_height > b_y + 2 &&
+        projectiles[i].y_coord < b_y + balloon_height - 2)
+      ) {
+        balloons.erase(balloons.begin() + j);
+        projectiles.erase(projectiles.begin() + i);
+      }
+    }
+  }
+
+
+  /*----------------- projectile ------------------*/  
   // move projectiles
   if (millis() - projectile_counter >= 25) {
     for (int i = 0; i < projectiles.size(); ++i) {
       projectile_counter = millis();
-      projectiles[i].flight();
+      projectiles[i].flight(0);
     }
   }
   // draw projectiles
@@ -165,6 +212,7 @@ void loop() {
       projectiles.erase(projectiles.begin() + i);
     }
   }
+  
 
   /* ----------------------- animation ------------------------- */
   spaceman.set_animation();

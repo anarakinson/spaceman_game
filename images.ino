@@ -183,24 +183,7 @@ const unsigned char sprite_spaceman_right_fly_attack2 [] PROGMEM = {
 };
 
 
-// Array of all bitmaps for convenience. (Total bytes used to store images in PROGMEM = 1728)
-const int sprite_allArray_LEN = 12;
-const unsigned char* sprite_allArray[12] = {
-  sprite_spaceman_left,
-  sprite_spaceman_left_attack,
-  sprite_spaceman_left_fly1,
-  sprite_spaceman_left_fly2,
-  sprite_spaceman_left_run1,
-  sprite_spaceman_left_run2,
-  sprite_spaceman_right,
-  sprite_spaceman_right_attack,
-  sprite_spaceman_right_fly1,
-  sprite_spaceman_right_fly2,
-  sprite_spaceman_right_run1,
-  sprite_spaceman_right_run2
-};
-
-
+/* ---------------------------------------------------------- */
 const unsigned char* spaceman_left_run[2] = {
   sprite_spaceman_left_run1,
   sprite_spaceman_left_run2

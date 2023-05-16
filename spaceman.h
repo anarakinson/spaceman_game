@@ -14,10 +14,10 @@ class Spaceman {
   public:
 
     // get inputs
-    void get_left_move(bool action) { left_move = action; }
-    void get_right_move(bool action) { right_move = action; }
-    void get_attack_action(bool action) { attack_action = action; }
-    void get_jump_action(bool action) { jump_action = action; }
+    void set_left_move(bool action) { left_move = action; }
+    void set_right_move(bool action) { right_move = action; }
+    void set_attack_action(bool action) { attack_action = action; }
+    void set_jump_action(bool action) { jump_action = action; }
 
     // set coordinates
     void set_x(int x) { spaceman_x = x; }
@@ -51,7 +51,7 @@ class Spaceman {
 
     /* -------------- ACT -------------- */
     void set_stand_state();
-    void move();
+    void move(int&, std::vector<Projectile>&);
     void attack(std::vector<Projectile> &);
     void set_animation();
     /* -------------- *** -------------- */

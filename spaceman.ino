@@ -24,7 +24,7 @@ void Spaceman::set_stand_state() {
 }
 
 // moving, jumping, falling
-void Spaceman::move() {
+void Spaceman::move(int &environment_coords, std::vector<Projectile> &projectiles) {
   /* ----- move ----- */
   if (left_move && (millis() - left_counter >= 50)) {
     left_counter = millis();
@@ -33,6 +33,13 @@ void Spaceman::move() {
       spaceman_x--;
     } else {
       environment_coords++;
+      for (int i = 0; i < projectiles.size(); ++i) {
+        if (projectiles[i].right_direction) {
+          projectiles[i].x_coord += 2;
+        } else if (!projectiles[i].right_direction) {
+          projectiles[i].x_coord += 0;
+        }
+      }  
     }
     stand_animation = false;
     run_animation = true;
@@ -45,6 +52,13 @@ void Spaceman::move() {
       spaceman_x++;
     } else {
       environment_coords--;
+      for (int i = 0; i < projectiles.size(); ++i) {
+        if (projectiles[i].right_direction) {
+          projectiles[i].x_coord -= 0;
+        } else if (!projectiles[i].right_direction) {
+          projectiles[i].x_coord -= 2;
+        }
+      }  
     }
     stand_animation = false;
     run_animation = true;
