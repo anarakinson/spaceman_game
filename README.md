@@ -11,7 +11,7 @@ done:
 4. Created projectiles
 5. Create class "spaceman"
 6. Create abstract class Enemy
-7. Add enemy balloon (only base)
+7. Add enemy balloon (explodes when hitted, randomly generated)
 
 todo: 
 1. Create enemies
