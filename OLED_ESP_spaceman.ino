@@ -106,7 +106,8 @@ void loop() {
   display.drawString(74, 2, String(spaceman.get_ammo()));
 
   // debug
-  display.drawString(2, 44, String(millis() / 1000));
+  // display.drawString(2, 44, String(millis() / 1000));
+  display.drawString(2, 44, String(balloons.size()));
   
   display.drawHorizontalLine(0, 14, 128);
   
@@ -150,10 +151,15 @@ void loop() {
 
 
   /* ----------------------------- balloons ----------------------------- */
-  if (millis() - balloon_counter >= 4000) {
+  if (
+    millis() - balloon_counter >= 4000 + random(0, 4000)
+    // && (environment_coords < -100 || environment_coords > 100)
+    ) {
     balloon_counter = millis();
-
-    Balloon balloon(DISPLAY_WIDTH / 3 - environment_coords, DISPLAY_HEIGHT);
+    
+    /* ----- balloon random placement ----- */
+    int spawn_place = random(-balloon_width, DISPLAY_WIDTH + balloon_width);
+    Balloon balloon(spawn_place - environment_coords, DISPLAY_HEIGHT);
     balloons.push_back(balloon);
   }
   for (int j = 0; j < balloons.size(); ++j) {
@@ -167,9 +173,14 @@ void loop() {
       balloon_height, 
       balloons[j].get_bits()
     );
-    if (b_y < -DISPLAY_HEIGHT) {
+    if (b_y < 0 - balloon_height || balloons[j].is_dead()) {
       balloons.erase(balloons.begin() + j);
     }
+    
+    /* ----- debug ----- */
+    // display.drawString(5 * j, 54, String(balloons[j].is_dead()));
+    display.drawString(5 * j, 54, String(balloons[j].get_hitpoints()));
+    /* ----- *** ----- */
 
     for (int i = 0; i < projectiles.size(); ++i) {
       if (
@@ -179,7 +190,7 @@ void loop() {
         (projectiles[i].y_coord + projectile_height > b_y + 2 &&
         projectiles[i].y_coord < b_y + balloon_height - 2)
       ) {
-        balloons.erase(balloons.begin() + j);
+        balloons[j].explode();
         projectiles.erase(projectiles.begin() + i);
       }
     }

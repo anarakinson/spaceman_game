@@ -12,10 +12,7 @@ class Balloon: public Enemy {
     }
 
     void move() override;
-
-    void explode() {
-      balloon_bits = sprite_balloon_explode;
-    }
+    void explode();
 
     const unsigned char *get_bits() {
       return balloon_bits;
@@ -25,6 +22,9 @@ class Balloon: public Enemy {
     bool jitter_marker = false;
     unsigned long long move_timer = 0;
     unsigned long long jitter_timer = 0;
+    unsigned long long explode_timer = 0;
+
+    bool explosion = false;
 
     const unsigned char *balloon_bits = sprite_balloon;
 };

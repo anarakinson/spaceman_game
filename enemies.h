@@ -14,8 +14,9 @@ class Enemy {
 
     // hitpoints and lifetime
     void set_hitpoints(int hp) { hitpoints = hp; }
+    int get_hitpoints() { return hitpoints; }
     void hit() { --hitpoints; }
-    bool is_dead() { if (hitpoints < 0) return false; else return true; }
+    bool is_dead() { if (hitpoints > 0) return false; else return true; }
   
     // interface
     virtual void move() = 0;
