@@ -17,10 +17,9 @@ void Balloon::move() {
     set_y(y);
 
     /* ----- explosion ----- */
-    if (millis() - explode_timer >= 700 && explosion) {
-      explode_timer = millis();
+    if (millis() - explode_timer >= 100 && explosion) {
+      hit(); 
       // set_hitpoints(0);
-      hit();
     }
     /* ----- *** ----- */
 
@@ -28,6 +27,7 @@ void Balloon::move() {
 }
 
 void Balloon::explode() {
+  explode_timer = millis();
   balloon_bits = sprite_balloon_explode;
   explosion = true;
 }

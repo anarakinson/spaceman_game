@@ -9,7 +9,8 @@
 
 #include <vector>
 
-
+/* ----------------------------------------------------------------- */
+#define balloon_debug_mode 1
 /*-------------------------------------------------------------------*/
 
 #define SCL_PIN D4
@@ -107,8 +108,10 @@ void loop() {
 
   // debug
   // display.drawString(2, 44, String(millis() / 1000));
+#if balloon_debug_mode
   display.drawString(2, 44, String(balloons.size()));
-  
+#endif
+
   display.drawHorizontalLine(0, 14, 128);
   
   /* ----- --- ----- */
@@ -178,8 +181,10 @@ void loop() {
     }
     
     /* ----- debug ----- */
+#if balloon_debug_mode
     // display.drawString(5 * j, 54, String(balloons[j].is_dead()));
     display.drawString(5 * j, 54, String(balloons[j].get_hitpoints()));
+#endif
     /* ----- *** ----- */
 
     for (int i = 0; i < projectiles.size(); ++i) {
