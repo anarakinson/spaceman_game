@@ -28,7 +28,8 @@ todo:
 9. Add variety of biomes and level changing
 10. Refactor code
 
+---
 
-![out1](https://github.com/anarakinson/spaceman_game/assets/82051121/19199f0d-7a9e-4e7c-9dd7-daebdbc741b0)
+![out1](https://github.com/anarakinson/spaceman_game/assets/82051121/5c1d0905-ee88-4428-a3a3-71c82d1f2502)
 ![out2](https://github.com/anarakinson/spaceman_game/assets/82051121/8c21df36-bb6c-4a73-b064-1a0a6f328255)
 ![out3](https://github.com/anarakinson/spaceman_game/assets/82051121/5c23073d-53cc-481d-a9c4-8ab66ba226b0)
