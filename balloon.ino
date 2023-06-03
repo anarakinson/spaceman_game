@@ -18,8 +18,7 @@ void Balloon::move() {
 
     /* ----- explosion ----- */
     if (millis() - explode_timer >= 100 && explosion) {
-      hit(); 
-      // set_hitpoints(0);
+      death(); 
     }
     /* ----- *** ----- */
 

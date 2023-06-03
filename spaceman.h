@@ -6,8 +6,8 @@
 #include <vector>
 
 
-#define FUEL_LIMIT 75
-#define AMMO_LIMIT 25
+#define FUEL_LIMIT 100
+#define AMMO_LIMIT 10
 
 
 class Spaceman {
@@ -43,6 +43,7 @@ class Spaceman {
 
     // hitpoints
     void set_hitpoints(unsigned short hp) { hitpoints = hp; }
+    void hit() { --hitpoints; }
     unsigned short get_max_hitpoints() { return MAX_HITPOINTS; }
     unsigned short get_hitpoints() { return hitpoints; }
     void update_hitpoints(int);
